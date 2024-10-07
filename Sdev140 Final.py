@@ -1,3 +1,5 @@
+import tkinter as tk
+
 class Game:
     def __init__(self, name, kills, deaths, matches):
         self.name = name
@@ -41,11 +43,40 @@ class Game:
         print("Your average kills per match in", nameString, "is:", avgKillsPerMatch)
         print("Your average deaths per match in", nameString, "is:", avgDeathsPerMatch)
 
+class Counter:
+    def __init__(self):
+        self.gameList = []
+    
+    def addGame(self, gameInput):
+        print("add game ran")
+        #self.gameList.append(gameInput)
+    
+    def showAllStats(self):
+        for game in self.gameList:
+            game.calculateStats()
+    
+    def hasGame(self, inputName):
+        for game in self.gameList:
+            if game.getName() == inputName:
+                return True
+        return False
+    
+    def updateGame(self):
+        print("update game ran")
+
 def main():
-    testGame = Game("Fortnite", 500, 10, 10)
-    testGame.calculateStats()
-    anotherTest = Game("Halo", 745, 452, 328)
-    anotherTest.calculateStats()
+    newCounter = Counter()
+    while True:
+        try:
+            userInput = str("Enter a game you would like to track, a game being tracked, or nothing to quit: ")
+            if userInput == "":
+                break
+            elif newCounter.hasGame(userInput):
+                newCounter.updateGame()
+            else:
+                newCounter.addGame()
+        except:
+            print("Enter a valid input")
 
 if __name__ == "__main__":
     main()
